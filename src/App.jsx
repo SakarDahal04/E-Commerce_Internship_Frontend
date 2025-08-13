@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import './App.css'
 // import Product from './components/products/ProductList.jsx'
 
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+=======
+<<<<<<< HEAD
+import './App.css'
+import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+=======
+import { useState } from 'react'
+import './App.css'
+import Product from './components/products/ProductList.jsx'
+>>>>>>> 7e06120 (just displayed a table)
+>>>>>>> 58f3079 (just displayed a table)
 
 import RootLayout from './Layout/RootLayout'
 import { AuthContextProvider } from './context/AuthContext'
