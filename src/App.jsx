@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Orders from "./components/Orders";
+import UserOrders from "./components/UserOrders";
 import OrderItems from "./components/OrderItems";
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Orders />} />
-        <Route path="/order-items" element={<OrderItems />} />
+        <Route path="orders" element={<UserOrders />} />
+        <Route path="order-items" element={<OrderItems />} />
       </Routes>
     </BrowserRouter>
   );
