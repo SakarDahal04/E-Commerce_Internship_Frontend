@@ -9,25 +9,46 @@
 
 .user-orders-table th,
 .user-orders-table td {
-  border: 1px solid #ccc;
+  border: 1px solid #f1dede;
   padding: 10px;
   text-align: left;
 }
 
 .user-orders-table th {
-  background-color: #f5f5f5;
+  background-color: #f3f69e;
   font-weight: bold;
 }
 
 .user-orders-table tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #f8fdff;
 }
 
 .user-orders-table tr:hover {
-  background-color: #e0f7fa;
+  background-color: #d2ebeb;
 }
 
 h2 {
   font-family: Arial, sans-serif;
-  color: #333;
+  color: #222121;
+}
+
+@media screen and (max-width: 768px) {
+  .user-orders-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+.user-orders-table td:first-child {
+  font-weight: bold; /* highlights Order ID */
+}
+.user-orders-table td:nth-child(2) {
+  color: #2c3e50; /* products column */
+}
+
+.user-orders-table {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
