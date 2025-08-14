@@ -2,24 +2,19 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
+import { useLoaderData } from "react-router-dom";
+
 export default function UserOrders() {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/orders", {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY2NDQ1LCJpYXQiOjE3NTUxNjYxNDUsImp0aSI6IjYxYzM4NWI5NDI2ZTRlNjQ4OTJhOWM2Yjg0NTNjMWY0IiwidXNlcl9pZCI6IjUifQ.FtIAL0DDyte25mqxZgU732kq3XnUJ4SWF4bG6u6fhjg",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setOrders(data.results))
-      .catch((err) => console.error("Error fetching orders:", err));
-  }, []);
+  const loadedOrderItems = useLoaderData()
+
+  console.log(loadedOrderItems)
+
 
   return (
     <div className="orders-grid">
-      {orders.map((order) => (
+      {loadedOrderItems.map((order) => (
         <div className="order-container" key={order.id}>
           <h3>Order #{order.id}</h3>
           <div className="products-grid">

@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound'
 import CartLayout from './Layout/CartLayout'
 import Cart from './components/Cart/Cart'
 // import CartItem from './components/CartItem/CartItem'
-import { fetchCartLoader } from './utils/loaders'
+import { fetchCartLoader, fetchOrderLoader } from './utils/loaders'
 import Login from './pages/Login'
 import { Outlet } from 'react-router-dom'
 import Register from './pages/Register'
@@ -47,7 +47,7 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
 
-          <Route path="orders" element={<UserOrders />} />
+          <Route path="orders" element={<UserOrders />} loader={fetchOrderLoader} />
         <Route path="/order-items/:orderId" element={<OrderItems />} />
 
           <Route path="*" element={<NotFound />} />

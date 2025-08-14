@@ -7,6 +7,10 @@ export async function fetchCartLoader() {
     // Get tokens from localStorage (or cookies)
     const authTokens = JSON.parse(localStorage.getItem("authTokens"));
 
+    if (!authTokens) {
+      throw new Response("Unauthorized", { status: 401 });
+    }
+
     // Create an axios instance (pass nulls if not needed)
     const api = createAxiosInstance(authTokens, null, null);
 
@@ -20,5 +24,29 @@ export async function fetchCartLoader() {
   } catch (error) {
     console.error("Error loading cart:", error);
     throw new Response("Failed to load cart", { status: 500 });
+  }
+}
+
+
+export async function fetchOrderLoader() {
+  console.log("fetchOrderLoader is running ✅")
+
+  try {
+    const authTokens = JSON.parse(localStorage.getItem("authTokens"))
+
+    if (!authTokens) {
+      throw new Response("Unauthorized", { status: 401 });
+    }
+
+    const api = createAxiosInstance(authTokens, null, null)
+
+    const response = await api.get("/api/user_ordersorders/")
+
+    console.log("This is hte order response: \n",response.data)
+
+    return response.data.results;
+  } catch (error) {
+      console.error("Failed to fetch the orders: ", error)
+      throw new Response("Failed to load the orders", {status: 500})
   }
 }
