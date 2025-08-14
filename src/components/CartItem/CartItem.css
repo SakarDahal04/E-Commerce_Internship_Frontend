@@ -1,0 +1,25 @@
+.cartUnits {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.delete-cart-item {
+    cursor: pointer;
+}
+
+/* .cartQuantity {
+
+} */
+
+/* input[type=number] {
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  text-align: center;
+  width: 3ch; 
+}
+
+input[type=number]:focus {
+  outline: none;
+} */

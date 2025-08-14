@@ -18,29 +18,30 @@ export default function UserOrders() {
   }, []);
 
   return (
-   <div className="orders-grid">
-  {orders.map((order) => (
-    <div className="order-container" key={order.id}>
-      <h3>Order #{order.id}</h3>
-      <div className="products-grid">
-        {order.order_items.map((item, idx) => (
-          <div className="product-card" key={idx}>
-            <p><strong>{item.product.name}</strong></p>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
+    <div className="orders-grid">
+      {orders.map((order) => (
+        <div className="order-container" key={order.id}>
+          <h3>Order #{order.id}</h3>
+          <div className="products-grid">
+            {order.order_items.map((item, idx) => (
+              <div className="product-card" key={idx}>
+                <p><strong>{item.product.name}</strong></p>
+                <p>Quantity: {item.quantity}</p>
+                <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <p className="order-total">
-        <strong>Total:</strong> $
-        {order.order_items
-          .reduce((sum, item) => sum + parseFloat(item.price), 0)
-          .toFixed(2)}
-      </p>
-      <Link to={`/order-items/${order.id}`} className="view-link">
-        View Items
-      </Link>
+          <p className="order-total">
+            <strong>Total:</strong> $
+            {order.order_items
+              .reduce((sum, item) => sum + parseFloat(item.price), 0)
+              .toFixed(2)}
+          </p>
+          <Link to={`/order-items/${order.id}`} className="view-link">
+            View Items
+          </Link>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-  )}
+  )
+}
