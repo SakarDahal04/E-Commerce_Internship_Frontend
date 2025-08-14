@@ -9,7 +9,7 @@ export default function UserOrders() {
     fetch("http://127.0.0.1:8000/api/orders", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY2NDQ1LCJpYXQiOjE3NTUxNjYxNDUsImp0aSI6IjYxYzM4NWI5NDI2ZTRlNjQ4OTJhOWM2Yjg0NTNjMWY0IiwidXNlcl9pZCI6IjUifQ.FtIAL0DDyte25mqxZgU732kq3XnUJ4SWF4bG6u6fhjg",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY4NjEwLCJpYXQiOjE3NTUxNjgzMTAsImp0aSI6IjlhOWFhZjRiNmJiNzQ2N2Q4M2QzNDMwODc1Y2E4MTcxIiwidXNlcl9pZCI6IjUifQ.oKw8JF5tnASNe94KLAuCfnPKHO-hKbZacMIdpjNpaW8",
       },
     })
       .then((res) => res.json())
