@@ -125,7 +125,6 @@ const Cart = () => {
     if (!checkForCartItem()) return
     console.log("hello")
     await updateSelectedItems()
-    console.log("alreaady updated")
     await createOrder()
   }
 

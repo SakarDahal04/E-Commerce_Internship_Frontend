@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 th, td {
@@ -29,4 +28,8 @@ tr:hover {
 
 .cart-actions button {
     cursor: pointer;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b68a90 (Features of cart, authentication login and registration completed with interceptors for auth tokens)
 }
