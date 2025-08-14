@@ -12,7 +12,7 @@ export default function OrderItems() {
     fetch(`http://localhost:8000/api/order-items/by-order/${orderId}/`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTU1Njc2LCJpYXQiOjE3NTUxNTUzNzYsImp0aSI6IjRjYjUzNzUxYTkyYTQ1ZjRhNTkwZjBlM2YxNDVjMDJhIiwidXNlcl9pZCI6IjUifQ.PRXE5wCUAQxfJF_a9LC7ruMS19VeJ9PflXGFYmS_TYA"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTYzMjk3LCJpYXQiOjE3NTUxNjI5OTcsImp0aSI6IjNiM2NhMzkyNTg5MDRiZDQ5MTVjNjhjMWQwZGRlNDJhIiwidXNlcl9pZCI6IjUifQ.Vx3i4k2gB-oI2T9FNpInR9r3-VgrWXtFg-Kj2Sz12qI"
       }
     })
       .then((res) => res.json())
@@ -21,7 +21,7 @@ export default function OrderItems() {
   }, [orderId]);
 
   return (
-    <div>
+    <div className = "user-orders-container">
       <h2>Order Items</h2>
       {items.length > 0 ? (
         <table className="order-items-table">

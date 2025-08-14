@@ -3,7 +3,8 @@
   border-collapse: collapse;
   margin-top: 20px;
   font-family: Arial, sans-serif;
-    opacity: 1;
+  opacity: 1;
+  background-color: #ffffff
   
 }
 
@@ -20,11 +21,11 @@
 }
 
 .order-items-table tr:nth-child(even) {
-  background-color: #f9f6f683;
+  background-color: #ffffff;
 }
 
 .order-items-table tr:hover {
-  background-color: #e0f7fa;
+  background-color: #e0e0e0;
   transition: opacity 0.5s ease 0s;
   opacity: 0.70;
 }
@@ -33,3 +34,21 @@ h2 {
   font-family: Arial, sans-serif;
   color: #000000;
 }
+
+.user-orders-container {
+  max-width: 900px;
+  margin: 40px auto; 
+  padding: 20px;
+  background-color: #fcfcfc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+.user-orders-container p {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 50px;
+}
+
