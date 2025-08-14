@@ -7,44 +7,50 @@ export default function OrderItems() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/orders/${orderId}/items/`)
+    if (!orderId) return; // avoid fetching if undefined
+
+    fetch(`http://localhost:8000/api/order-items/by-order/${orderId}/`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTU1Njc2LCJpYXQiOjE3NTUxNTUzNzYsImp0aSI6IjRjYjUzNzUxYTkyYTQ1ZjRhNTkwZjBlM2YxNDVjMDJhIiwidXNlcl9pZCI6IjUifQ.PRXE5wCUAQxfJF_a9LC7ruMS19VeJ9PflXGFYmS_TYA"
+      }
+    })
       .then((res) => res.json())
-      .then((data) => setItems(data))
+      .then((data) => setItems(data.results || data))
       .catch((err) => console.error("Error fetching items:", err));
   }, [orderId]);
 
   return (
     <div>
       <h2>Order Items</h2>
-      <table
-        border="1"
-        cellPadding="8"
-        className="order-items-table"
-        style={{ borderCollapse: "collapse" }}
-      >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>ORDER-ID</th>
-            <th>NAME</th>
-            <th>QUANTITY</th>
-            <th>PRICE</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.orderId}</td>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>${item.price.toFixed(2)}</td>
-              <td>{item.status}</td>
+      {items.length > 0 ? (
+        <table className="order-items-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Order ID</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.order?.id || item.order}</td>
+                <td>{item.product?.name || "N/A"}</td>
+                <td>{item.quantity}</td>
+                <td>{item.price != null ? `$${Number(item.price).toFixed(2)}` : "N/A"}</td>
+                <td>{item.status || "Pending"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No items found for this order.</p>
+      )}
     </div>
   );
 }

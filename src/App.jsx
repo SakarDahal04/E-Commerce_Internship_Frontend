@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="orders" element={<UserOrders />} />
-        <Route path="order-items" element={<OrderItems />} />
+        <Route path="/order-items/:orderId" element={<OrderItems />} />
       </Routes>
     </BrowserRouter>
   );
