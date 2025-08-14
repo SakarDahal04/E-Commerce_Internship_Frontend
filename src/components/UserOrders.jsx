@@ -9,7 +9,7 @@ export default function UserOrders() {
     fetch("http://127.0.0.1:8000/api/orders", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY0NDcyLCJpYXQiOjE3NTUxNjQxNzIsImp0aSI6IjdkMDJhNzdlZTcwNTQwOGY4ZDJjZGFkY2FiZTJjMjg4IiwidXNlcl9pZCI6IjUifQ.mh84SaRgvBg1NScEWRzZB9q7nFh4FG0Y1-xz5OWIFzU",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY2NDQ1LCJpYXQiOjE3NTUxNjYxNDUsImp0aSI6IjYxYzM4NWI5NDI2ZTRlNjQ4OTJhOWM2Yjg0NTNjMWY0IiwidXNlcl9pZCI6IjUifQ.FtIAL0DDyte25mqxZgU732kq3XnUJ4SWF4bG6u6fhjg",
       },
     })
       .then((res) => res.json())
@@ -20,17 +20,18 @@ export default function UserOrders() {
   return (
    <div className="orders-grid">
   {orders.map((order) => (
-    <div className="order-card" key={order.id}>
+    <div className="order-container" key={order.id}>
       <h3>Order #{order.id}</h3>
-      <p>
-        <strong>Products:</strong>
+      <div className="products-grid">
         {order.order_items.map((item, idx) => (
-          <span key={idx} className={`status-badge ${order.status.toLowerCase()}`} >
-            {item.product.name} x {item.quantity}{" "}
-          </span>
+          <div className="product-card" key={idx}>
+            <p><strong>{item.product.name}</strong></p>
+            <p>Quantity: {item.quantity}</p>
+            <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
+          </div>
         ))}
-      </p>
-      <p>
+      </div>
+      <p className="order-total">
         <strong>Total:</strong> $
         {order.order_items
           .reduce((sum, item) => sum + parseFloat(item.price), 0)

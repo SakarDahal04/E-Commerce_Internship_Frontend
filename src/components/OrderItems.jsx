@@ -7,12 +7,12 @@ export default function OrderItems() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (!orderId) return; // avoid fetching if undefined
+    if (!orderId) return;
 
     fetch(`http://localhost:8000/api/order-items/by-order/${orderId}/`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTYzMjk3LCJpYXQiOjE3NTUxNjI5OTcsImp0aSI6IjNiM2NhMzkyNTg5MDRiZDQ5MTVjNjhjMWQwZGRlNDJhIiwidXNlcl9pZCI6IjUifQ.Vx3i4k2gB-oI2T9FNpInR9r3-VgrWXtFg-Kj2Sz12qI"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY2NDQ1LCJpYXQiOjE3NTUxNjYxNDUsImp0aSI6IjYxYzM4NWI5NDI2ZTRlNjQ4OTJhOWM2Yjg0NTNjMWY0IiwidXNlcl9pZCI6IjUifQ.FtIAL0DDyte25mqxZgU732kq3XnUJ4SWF4bG6u6fhjg"
       }
     })
       .then((res) => res.json())
@@ -21,33 +21,17 @@ export default function OrderItems() {
   }, [orderId]);
 
   return (
-    <div className = "user-orders-container">
-      <h2>Order Items</h2>
+    <div className="orders-grid">
       {items.length > 0 ? (
-        <table className="order-items-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Order ID</th>
-              <th>Product Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.order?.id || item.order}</td>
-                <td>{item.product?.name || "N/A"}</td>
-                <td>{item.quantity}</td>
-                <td>{item.price != null ? `$${Number(item.price).toFixed(2)}` : "N/A"}</td>
-                <td>{item.status || "Pending"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        items.map((item) => (
+          <div className="product-card" key={item.id}>
+            <h3>{item.product?.name || "N/A"}</h3>
+            <p><strong>Quantity:</strong> {item.quantity}</p>
+            <p><strong>Price:</strong> ${item.price != null ? Number(item.price).toFixed(2) : "N/A"}</p>
+            <p><strong>Status:</strong> {item.status || "Pending"}</p>
+            <p><strong>Order ID:</strong> {item.order?.id || item.order}</p>
+          </div>
+        ))
       ) : (
         <p>No items found for this order.</p>
       )}
