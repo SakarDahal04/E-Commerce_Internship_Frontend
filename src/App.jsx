@@ -1,16 +1,12 @@
 import { useState } from 'react'
 import './App.css'
-import Product from './components/products/ProductList.jsx'
+import ProductCard from './components/products/ProductCard.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <ProductCard />
+    )
 
-  return (
-    <>
-    <h1>Welcome !!!</h1>
-    <Product />
-    </>
-  )
 }
-
 export default App
+

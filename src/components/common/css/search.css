@@ -1,0 +1,14 @@
+.common-search{
+        
+        color: var(--text-color, blue);
+        height: 50px;
+        border-radius: 10px;
+        width: var(--width, 300px);
+        margin-left: 10px;
+        margin-right: 10px;
+
+}
+.common-search-button{
+        display: flex;
+
+}

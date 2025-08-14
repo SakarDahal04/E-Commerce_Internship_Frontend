@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { fetchProduct } from "./api";
+import TableSearch from "./../common/TableSearch.jsx"
 
 function ProductList() {
     console.log("second time ")
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState({});
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
@@ -30,34 +31,21 @@ function ProductList() {
     if (error) {
         return <p>some errors man: {error}</p>
     }
+    // const isPlainObject = (obj) => {
+    //     return obj !== null && typeof obj === 'object' && obj.constructor === Object;
+    // };
+    // the above function checks if the data structure is dictionary or not
+    
+    // const purified_products = {} 
+
+    // const myProductTable = {
+    //     heading : "Product",
+    //     list : products,
+    //     bgColor: "red"
+    // }
 
     return (
-        <div>
-            <h1>Products</h1>
-            <table>
-                <thead>
-            <tr>
-                <th>category</th>
-                <th>tags</th>
-                <th>name</th>
-                <th>description</th>
-                <th>price</th>
-            </tr></thead>
-            <tbody>
-            {products.map((product) =>
-            (
-                <tr key={product.id}>
-                    <td>{product.category.id}</td>
-                    <td>{product.tags.id}</td>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.price}</td>
-                </tr>
-
-            ))}
-            </tbody>
-            </table>
-        </div>
+        <TableSearch table={myProductTable} />
     )
 
 }

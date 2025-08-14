@@ -21,7 +21,7 @@ export async function fetchProduct(filters = {}, search) {
         throw new Error("we can't fetch products")
     }
     else {
-        return data.results 
+        return data.results
     }
 }
 
