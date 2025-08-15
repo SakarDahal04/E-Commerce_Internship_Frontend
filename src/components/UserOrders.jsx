@@ -63,6 +63,7 @@ export default function UserOrders() {
               )
               .toFixed(2)}</span>
           </p>
+
           <Link to={`/order-items/${order.id}`} className="view-link">
             View Details →
           </Link>
