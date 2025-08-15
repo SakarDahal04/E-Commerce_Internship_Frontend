@@ -10,7 +10,6 @@ export async function authTokens() {
         })
     })
     const data = await res.json()
-    console.log("MERO DATA", data)
 
     if (!res.ok) {
         throw new Error("we can't fetch products")
@@ -24,10 +23,10 @@ export async function fetchProduct(id, filters = {}, search) {
     let params = new URLSearchParams();
     const authToken = await authTokens()
 
+
     if (id) {
-        const query = id + "/"
-        console.log("QUERY", query)
-        const res = await fetch(`http://localhost:8000/api/product/products/ + ${query}`, {
+        let query = id + "/"
+        const res = await fetch(`http://localhost:8000/api/product/products/${query}`, {
             headers: {
                 Authorization: `Bearer ${authToken.access}`
             }
@@ -41,8 +40,8 @@ export async function fetchProduct(id, filters = {}, search) {
         else {
             return data
         }
-
     }
+
     if (filters) {
         for (const [key, value] of Object.entries(filters)) {
             params.append(key, value);
@@ -51,16 +50,20 @@ export async function fetchProduct(id, filters = {}, search) {
     if (search) {
         params.append("search", search)
     }
+
     let query = ""
     if (params.toString()) {
         query = `?${params.toString()}`
     }
-    console.log("YETA TALA XA KI NAI", authToken.access)
-    const res = await fetch(`http://localhost:8000/api/product/products/ + ${query}`, {
+
+    console.log("QUERY MA K XA ", query)
+
+    const res = await fetch(`http://localhost:8000/api/product/products/${query}`, {
         headers: {
             Authorization: `Bearer ${authToken.access}`
         }
     });
+    // const res = await fetch(`http://localhost:8000/api/product/products/${query}`)
     const data = await res.json()
 
 
