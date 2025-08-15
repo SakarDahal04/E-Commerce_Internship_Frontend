@@ -15,6 +15,7 @@ export async function fetchProduct(filters = {}, search) {
 
     const res = await fetch("http://localhost:8000/api/product/products/" + query)
     const data = await res.json()
+
     console.log(data.results)
 
     if (!res.ok) {
