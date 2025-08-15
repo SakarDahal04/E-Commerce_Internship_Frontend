@@ -18,9 +18,11 @@ function ProductCard() {
             console.log(data)
             setProducts(data)
         }
-        catch {
-            setError("Can't get any response")
+        catch (err) {
+            console.error("Error fetching products:", err);
+            setError("Can't get any response");
         }
+
         finally {
             setLoading(false);
         }
@@ -37,6 +39,7 @@ function ProductCard() {
             products_purified.push([i, products[i]])
         }
     }
+    console.log("YETA XU CARDS MA")
     return (
         <>
             {products_purified.map((product) => <Cards key={product[1].id} card={{ id: product[1].id, title: product[1].name, description: product[1].description }} />)}
