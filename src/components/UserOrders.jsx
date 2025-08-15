@@ -1,20 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
 import { useLoaderData } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import useGetOrders from "../hooks/useGetOrders";
 
 export default function UserOrders() {
   const [orders, setOrders] = useState([]);
 
-  const loadedOrderItems = useLoaderData()
+  // const loadedOrderItems = useLoaderData()
+  // console.log(loadedOrderItems)
 
-  console.log(loadedOrderItems)
+  const getOrdersList = useGetOrders()
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const data = await getOrdersList()
+        setOrders(data.results)
+
+        console.log("obrained: ", data.results)
+      } catch (err) {
+        console.log("Failed to fetch the orders: ", err.message)
+      }
+    }
+
+    fetchOrders()
+  }, [])
 
 
   return (
     <div className="orders-grid">
-      {loadedOrderItems.map((order) => (
+      {orders.map((order) => (
         <div className="order-container" key={order.id}>
           <h3>Order #{order.id}</h3>
           <div className="products-grid">
@@ -22,21 +40,22 @@ export default function UserOrders() {
               <div className="product-card" key={idx}>
                 <p><strong>{item.product.name}</strong></p>
                 <p>Quantity: {item.quantity}</p>
-                <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
+                <p>Price: ${parseFloat(item.product.price).toFixed(2)}</p>
               </div>
             ))}
           </div>
           <p className="order-total">
             <strong>Total:</strong> $
             {order.order_items
-              .reduce((sum, item) => sum + parseFloat(item.price), 0)
+              .reduce((sum, item) => sum + parseFloat(item.product.price), 0)
               .toFixed(2)}
           </p>
           <Link to={`/order-items/${order.id}`} className="view-link">
             View Items
           </Link>
         </div>
-      ))}
+      )
+      )}
     </div>
   )
 }
