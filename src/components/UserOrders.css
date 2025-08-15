@@ -14,11 +14,10 @@ body {
 
 .products-grid {
   display: flex;
-  flex-wrap: wrap; /* allow items to go to next row */
+  flex-wrap: wrap; 
   gap: 16px;
-  justify-content: flex-start; /* instead of center if you want multiple rows */
-  /* max-height: 400px; /* optional: limit height */
-  /* scroll if too many items */
+  justify-content: flex-start; 
+
 }
 
 

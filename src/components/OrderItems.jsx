@@ -13,7 +13,7 @@ export default function OrderItems() {
     fetch(`http://localhost:8000/api/order-items/by-order/${orderId}/`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjUxNTE4LCJpYXQiOjE3NTUyNTEyMTgsImp0aSI6IjY4MDIwMGEwN2Q2ZDQ4MGM5ZTQ0MjBmYTE5MGFkZWViIiwidXNlcl9pZCI6IjUifQ.VFnrVdorlDX5l_BWm6yl4si6XjoOCycl25d-OpSZa48"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjU1NzA5LCJpYXQiOjE3NTUyNTU0MDksImp0aSI6IjQ1Yzc2NDIzMTJiYTQwMTM4MTkwZjlhODBlMDU0OGRhIiwidXNlcl9pZCI6IjUifQ.fJjZgOsXJO7t_uHTWiDZ-Agde0h9w_XrZaUsNlndO74"
       }
     })
       .then(res => res.json())
