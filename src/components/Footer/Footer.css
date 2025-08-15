@@ -1,0 +1,62 @@
+footer {
+  background: #262626;
+  color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.footerContent {
+    display: flex;
+    padding: 1rem 5rem;
+    gap: 1rem;
+}
+
+/* Left Content Logic */
+.leftContent {
+    width: 40%;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 2rem;
+    justify-content: start;
+    padding: 0;
+}
+
+.socialIcons li {
+    list-style: none;
+    font-size: 1.5rem;
+}
+
+.socialIcons li a {
+    color: white;
+}
+
+/* Right Content Logic */
+.rightContent {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.infoLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.infoLinks>a {
+    position: relative;
+    color: grey;
+    text-decoration: none;
+    transition: color 0.5s ease-out;
+}
+
+.infoLinks>a:hover{
+    color: white;
+}
+
+.copyright-container {
+    text-align: center;
+    color: grey;
+}

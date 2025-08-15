@@ -1,20 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* make the container at least fill the screen */
 }
 
-table, td, th {
-  border: 1px solid;
-  text-align: center;
-}
-table{
-  width: fit-content; 
-  border-color: white;
-  border-radius: 10px;
-  background-color: blueviolet;
-  border-collapse: collapse;
-
+.main-content {
+  flex: 1; /* pushes footer to the bottom when content is short */
 }
