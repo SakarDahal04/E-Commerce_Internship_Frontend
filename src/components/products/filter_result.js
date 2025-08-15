@@ -1,8 +1,8 @@
-const isDictionary = (variable) => {
+export const isDictionary = (variable) => {
         return typeof variable === 'object' && !Array.isArray(variable) && variable !== null;
 };
 
-function FilterDictionary(messyDict) {
+export function FilterDictionary(messyDict) {
         let purified = []
         for (let i in messyDict) {
                 if(isDictionary(messyDict[i])){
