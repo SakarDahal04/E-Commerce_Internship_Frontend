@@ -1,0 +1,20 @@
+.form-group {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 0.5rem;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+
+.form-field {
+    padding: 0.7rem;
+    width: 100%;
+    border-radius: 0.4rem;
+    border: 0.1px solid #fce8be;
+    /* background-color: #f5eddc; */
+    font-size: 0.9rem;
+}

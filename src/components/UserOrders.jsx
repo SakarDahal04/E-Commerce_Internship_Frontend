@@ -1,50 +1,63 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
+import { useLoaderData } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import useGetOrders from "../hooks/useGetOrders";
 
 export default function UserOrders() {
   const [orders, setOrders] = useState([]);
 
+  // const loadedOrderItems = useLoaderData()
+  // console.log(loadedOrderItems)
+
+  const getOrdersList = useGetOrders()
+
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/orders", {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjU2MDYxLCJpYXQiOjE3NTUyNTU3NjEsImp0aSI6ImM5YmI4OWExZTVhYjQ3NjliMjdlOGNhNDlkOWVhOThjIiwidXNlcl9pZCI6IjUifQ.IaAjkSfAlP_gPv4UTtN78QTSSX-tagNNXjG6y8sqopk",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setOrders(data.results))
-      .catch((err) => console.error("Error fetching orders:", err));
-  }, []);
+    const fetchOrders = async () => {
+      try {
+        const data = await getOrdersList()
+        setOrders(data.results)
+
+        console.log("obtained: ", data.results)
+      } catch (err) {
+        console.log("Failed to fetch the orders: ", err.message)
+      }
+    }
+
+    fetchOrders()
+  }, [])
 
   return (
-<div className="orders-grid">
-  {orders.map((order) => (
-    <div className="order-card" key={order.id}>
-      <h3>Order #{order.id}</h3>
+    <div className="orders-grid">
+      {orders.map((order) => (
+        <div className="order-card" key={order.id}>
+          <h3>Order #{order.id}</h3>
 
-      <div className="products-grid">
-        {order.order_items.map((item, idx) => (
-          <div className="product-card" key={idx}>
-            <p><strong>{item.product.name}</strong></p>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
+          <div className="products-grid">
+            {order.order_items.map((item, idx) => (
+              <div className="product-card" key={idx}>
+                <p><strong>{item.product.name}</strong></p>
+                <p>Quantity: {item.quantity}</p>
+                <p>Price: ${parseFloat(item.product.price).toFixed(2)}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <p className="order-total">
-        <strong>Total:</strong> $
-        {order.order_items
-          .reduce((sum, item) => sum + parseFloat(item.price), 0)
-          .toFixed(2)}
-      </p>
+          <p className="order-total">
+            <strong>Total:</strong> $
+            {order.order_items
+              .reduce((sum, item) => sum + parseFloat(item.product.price), 0)
+              .toFixed(2)}
+          </p>
 
-      <Link to={`/order-items/${order.id}`} className="view-link">
-        View Items
-      </Link>
+          <Link to={`/order-items/${order.id}`} className="view-link">
+            View Items
+          </Link>
+        </div>
+      )
+    )}
     </div>
-  ))}
-</div>
-  )}
+  )
+}
