@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import Product from './components/products/ProductList.jsx'
 
+import { Route } from 'react-router-dom'
+
 import RootLayout from './Layout/RootLayout'
 import { AuthContextProvider } from './context/AuthContext'
 
@@ -21,6 +23,9 @@ import Register from './pages/Register'
 import PrivateRoute from './context/PrivateRoute'
 import UserOrders from "./components/UserOrders";
 import OrderItems from "./components/OrderItems";
+import ProductCard from './components/products/ProductCard'
+import ProductDetail from './components/products/ProductDetail'
+
 
 function AuthWrapper() {
   return (
@@ -38,6 +43,17 @@ function App() {
         <Route path="/" element={<RootLayout />} >
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
+
+          <Route path='cart' element={
+            <PrivateRoute>
+              <CartLayout />
+            </PrivateRoute>
+          }>
+            <Route index element={<Cart />} loader={fetchCartLoader} />
+            {/* <Route path=':id' element={<CartItem />} /> */}
+          </Route>
+            <Route path='products' element={<ProductCard />} />
+            <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />

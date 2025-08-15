@@ -1,22 +1,68 @@
-export async function fetchProduct(filters = {}, search) {
+export async function authTokens() {
+    const res = await fetch("http://localhost:8000/api/login/", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": "admin",
+            "password": "admin"
+        })
+    })
+    const data = await res.json()
+    console.log("MERO DATA", data)
+
+    if (!res.ok) {
+        throw new Error("we can't fetch products")
+    }
+    else {
+        return data
+    }
+}
+
+export async function fetchProduct(id, filters = {}, search) {
     let params = new URLSearchParams();
+    const authToken = await authTokens()
+
+    if (id) {
+        const query = id + "/"
+        console.log("QUERY", query)
+        const res = await fetch(`http://localhost:8000/api/product/products/ + ${query}`, {
+            headers: {
+                Authorization: `Bearer ${authToken.access}`
+            }
+        });
+        const data = await res.json()
+
+
+        if (!res.ok) {
+            throw new Error("we can't fetch products")
+        }
+        else {
+            return data
+        }
+
+    }
     if (filters) {
-        for(const[key, value] of Object.entries(filters)){
+        for (const [key, value] of Object.entries(filters)) {
             params.append(key, value);
         }
     }
     if (search) {
         params.append("search", search)
     }
-    const query = ""
-    if(params.toString()){
-        query = `?${params.toString()}` 
+    let query = ""
+    if (params.toString()) {
+        query = `?${params.toString()}`
     }
-
-    const res = await fetch("http://localhost:8000/api/product/products/" + query)
+    console.log("YETA TALA XA KI NAI", authToken.access)
+    const res = await fetch(`http://localhost:8000/api/product/products/ + ${query}`, {
+        headers: {
+            Authorization: `Bearer ${authToken.access}`
+        }
+    });
     const data = await res.json()
 
-    console.log(data.results)
 
     if (!res.ok) {
         throw new Error("we can't fetch products")

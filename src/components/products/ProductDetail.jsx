@@ -1,22 +1,25 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { fetchProduct } from "./api";
 import Cards from "../common/Cards";
-import { Link } from "react-router-dom";
+import Table from "../common/Table";
 
-function ProductCard() {
-    const [products, setProducts] = useState([]);
+function ProductDetail() {
+    const [product, setproduct] = useState({});
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { id } = useParams()
+    console.log("ID yo ho", id)
 
-    useEffect(() => { loadProducts() }, [])
+    useEffect(() => { loadproduct(id) }, [])
 
-    async function loadProducts() {
+    async function loadproduct(id) {
         try {
             setLoading(true);
             // const filters = { category: "1" }
-            const data = await fetchProduct()
+            const data = await fetchProduct(id)
             console.log(data)
-            setProducts(data)
+            setproduct(data)
         }
         catch {
             setError("Can't get any response")
@@ -31,18 +34,18 @@ function ProductCard() {
     if (error) {
         return <p>some errors man: {error}</p>
     }
-    let products_purified = []
-    for (let i in products) {
-        if (products[i] != null) {
-            products_purified.push([i, products[i]])
-        }
+    const mytable = {
+        heading: product.name,
+        list: product 
     }
+
     return (
         <>
-            {products_purified.map((product) => <Cards key={product[1].id} card={{ id: product[1].id, title: product[1].name, description: product[1].description }} />)}
+        <Table  table={mytable} />
+
         </>
     )
 
 }
 
-export default ProductCard
+export default ProductDetail
