@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
+
 export default function UserOrders() {
   const [orders, setOrders] = useState([]);
 
@@ -9,7 +10,7 @@ export default function UserOrders() {
     fetch("http://127.0.0.1:8000/api/orders", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY4NjEwLCJpYXQiOjE3NTUxNjgzMTAsImp0aSI6IjlhOWFhZjRiNmJiNzQ2N2Q4M2QzNDMwODc1Y2E4MTcxIiwidXNlcl9pZCI6IjUifQ.oKw8JF5tnASNe94KLAuCfnPKHO-hKbZacMIdpjNpaW8",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjUxNTE4LCJpYXQiOjE3NTUyNTEyMTgsImp0aSI6IjY4MDIwMGEwN2Q2ZDQ4MGM5ZTQ0MjBmYTE5MGFkZWViIiwidXNlcl9pZCI6IjUifQ.VFnrVdorlDX5l_BWm6yl4si6XjoOCycl25d-OpSZa48",
       },
     })
       .then((res) => res.json())
@@ -18,10 +19,11 @@ export default function UserOrders() {
   }, []);
 
   return (
-   <div className="orders-grid">
+<div className="orders-grid">
   {orders.map((order) => (
-    <div className="order-container" key={order.id}>
+    <div className="order-card" key={order.id}>
       <h3>Order #{order.id}</h3>
+
       <div className="products-grid">
         {order.order_items.map((item, idx) => (
           <div className="product-card" key={idx}>
@@ -31,12 +33,14 @@ export default function UserOrders() {
           </div>
         ))}
       </div>
+
       <p className="order-total">
         <strong>Total:</strong> $
         {order.order_items
           .reduce((sum, item) => sum + parseFloat(item.price), 0)
           .toFixed(2)}
       </p>
+
       <Link to={`/order-items/${order.id}`} className="view-link">
         View Items
       </Link>
