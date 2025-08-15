@@ -3,7 +3,7 @@ import { fetchProduct } from "./api";
 import Cards from "../common/Cards";
 
 function ProductCard() {
-        const [products, setProducts] = useState({});
+        const [products, setProducts] = useState([[[]]]);
         const [loading, setLoading] = useState(true)
         const [error, setError] = useState(null)
 
@@ -30,7 +30,7 @@ function ProductCard() {
         if (error) {
                 return <p>some errors man: {error}</p>
         }
-        let products_purified = []
+        let products_purified =  
         for (let i in products) {
                 if (products[i] != null) {
                         products_purified.push([i, products[i]])
