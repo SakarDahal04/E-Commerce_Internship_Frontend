@@ -20,9 +20,13 @@ const Footer = () => {
                             return (
                                 <li key={index}>
                                     {/* hello */}
-                                    <Link to={social.link}>
+                                    <a
+                                        href={social.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <DynamicIcon iconName={social.icon} />
-                                    </Link>
+                                    </a>
                                 </li>
                             )
                         })}

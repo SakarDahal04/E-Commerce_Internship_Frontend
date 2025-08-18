@@ -4,6 +4,8 @@ import "./Navbar.css"
 
 import { NavData } from "../../data/Navdata"
 import { DynamicIcon } from "../../utils/iconMap"
+import { useContext } from "react"
+import AuthContext from "../../context/AuthContext"
 
 const RecursiveMenu = ({ items }) => {
     return (
@@ -18,7 +20,6 @@ const RecursiveMenu = ({ items }) => {
                             </span>
                         )}
                     </NavLink>
-
                     {/* Recursive Call */}
                     {item.items && <RecursiveMenu items={item.items} />}
                 </li>
@@ -28,6 +29,9 @@ const RecursiveMenu = ({ items }) => {
 }
 
 const Navbar = () => {
+    const { user, logoutUser } = useContext(AuthContext)
+
+
     return (
         <nav className="navContainer">
             <div className="navContent">
@@ -56,15 +60,25 @@ const Navbar = () => {
                     }
                 </ul>
                 <div className="navUserInfo">
-                    <Link to={'/cart'}>
-                        <DynamicIcon size={24} iconName={"FaShoppingCart"} />
-                    </Link>
-                    <Link to={"/login"}>
-                        <button>Login</button>
-                    </Link>
-                    <Link to={"/register"}>
-                        <button>Register</button>
-                    </Link>
+                    {!user ?
+                        <>
+                            <Link to={"/login"}>
+                                <button>Login</button>
+                            </Link>
+                            <Link to={"/register"}>
+                                <button>Register</button>
+                            </Link>
+                        </>
+                        :
+                        <>
+                            <Link to={'/cart'}>
+                                <DynamicIcon size={24} iconName={"FaShoppingCart"} />
+                            </Link>
+                            <Link onClick={() => { logoutUser() }} to={"/login"}>
+                                <button>Logout</button>
+                            </Link>
+                        </>
+                    }
                 </div>
             </div>
         </nav>
