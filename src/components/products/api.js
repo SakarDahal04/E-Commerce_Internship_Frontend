@@ -19,10 +19,10 @@ export async function fetchProduct(api, id, filters = {}, search) {
   }
   let query = params.toString() ? `?${params.toString()}` : ""
   if (id) {
-    const res = await api.get(`/product/products/${id}/`)
+    const res = await api.get(`api/product/products/${id}/`)
     return res.data
   }
-  const res = await api.get(`/product/products/${query}`)
+  const res = await api.get(`api/product/products/${query}`)
   return res.data.results
 }
 

@@ -4,9 +4,6 @@ import './css/cards.css';
 import { useNavigate } from 'react-router-dom';
 
 function Cards({ card}) {
-    function buttonClick(){
-        navigate(``)
-    }
     const myButton = {
         text: "Add to Cart",
         textColor: 'white'
