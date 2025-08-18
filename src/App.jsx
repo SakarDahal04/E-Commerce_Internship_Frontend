@@ -62,16 +62,18 @@ function App() {
             <Route path="orders" element={<UserOrders />} />
             <Route path="/order-items/:orderId" element={<OrderItems />} />
           </Route>
-          
+
           <Route path='products' element={<ProductCard />} />
           <Route path='products/:id' element={<ProductDetail />} />
 
-          <Route path='cart' element={ <PrivateRoute> <CartLayout /> </PrivateRoute>}>
+          <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>
             <Route index element={<Cart />} />
             {/* <Route path=':id' element={<CartItem />} /> */}
           </Route>
 
 
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Route>

@@ -23,9 +23,9 @@ function ProductCard() {
             const data = await fetchProduct(api)
             const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
 
-            // setProducts(data)
+            setProducts(data)
             setProducts(arr);
-            // setFilteredProducts(arr);
+            setFilteredProducts(arr);
         }
         catch (err) {
             console.error("Error fetching products:", err);

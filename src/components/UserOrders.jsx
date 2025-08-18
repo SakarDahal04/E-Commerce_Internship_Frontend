@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
-import { useLoaderData } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import useGetOrders from "../hooks/useGetOrders";
 
