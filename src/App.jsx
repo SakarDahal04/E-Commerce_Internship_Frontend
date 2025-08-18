@@ -26,6 +26,8 @@ import OrderItems from "./components/OrderItems";
 import ProductCard from './components/products/ProductCard'
 import ProductDetail from './components/products/ProductDetail'
 
+import Product from './components/Product/Product'
+
 
 function AuthWrapper() {
   return (
@@ -63,7 +65,9 @@ function App() {
             <Route path="/order-items/:orderId" element={<OrderItems />} />
           </Route>
 
-          <Route path='products' element={<ProductCard />} />
+          {/* <Route path='products' element={<ProductCard />} /> */}
+
+          <Route path='products' element={<Product />} />
           <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>

@@ -11,7 +11,7 @@ function Cards({ card}) {
     let navigate = useNavigate()
 
     function onClickFunction(){
-        console.log(card.id)
+        console.log(card)
         navigate(`${card.id}`)
     }
 

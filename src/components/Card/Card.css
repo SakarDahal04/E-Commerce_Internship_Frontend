@@ -1,0 +1,66 @@
+.cardContent {
+  background: #fff;
+  border-radius: 1rem;
+  position: relative;
+  cursor: pointer;
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.15); */
+}
+
+.cardContent > img {
+  width: 100%;      
+  height: 250px;    
+  object-fit: cover; 
+  /* border-radius: 0.5rem; */
+}
+.cardDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-left: 0.5rem;
+}
+
+.productCategory {
+    color: gray;
+}
+
+.productName {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+
+.cardContent:hover .productName
+{
+    color: orangered;
+}
+
+.cardIcons {
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    flex-direction: column;
+    top: 20%;
+    right: 10px;
+    transform: translateX(-1rem);
+    visibility: hidden;
+    opacity: 0;
+    transition-property: transform, visibility, opacity;
+    transition-duration: 0.3s;
+}
+
+.cardContent:hover .cardIcons {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+.cardIcons > span {
+    transition: color 0.2s ease;
+}
+
+.cardIcons > span:hover {
+    color: orangered;
+}
