@@ -62,6 +62,7 @@ function App() {
             <Route path="orders" element={<UserOrders />} />
             <Route path="/order-items/:orderId" element={<OrderItems />} />
           </Route>
+          
           <Route path='products' element={<ProductCard />} />
           <Route path='products/:id' element={<ProductDetail />} />
 

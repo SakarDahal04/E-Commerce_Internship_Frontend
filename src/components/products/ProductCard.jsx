@@ -23,9 +23,9 @@ function ProductCard() {
             const data = await fetchProduct(api)
             const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
 
-            setProducts(data)
+            // setProducts(data)
             setProducts(arr);
-            setFilteredProducts(arr);
+            // setFilteredProducts(arr);
         }
         catch (err) {
             console.error("Error fetching products:", err);
@@ -55,14 +55,15 @@ function ProductCard() {
         });
         setFilteredProducts(filtered);
     }
+
     const mySearch = {
         searchPlaceholder: "Search Product",
         onChange: setSearchTerm ,
         onSearch:  handleSearchClient 
-
         // searchFunction: 
     }
     console.log("YETA XU CARDS MA")
+
     return (
         <>
             <Search search={mySearch} />
@@ -74,7 +75,10 @@ function ProductCard() {
                     <Cards
                         key={product.id}
                         card={{
-                            id: product.id, title: product.name, description: product.description, image: product.image,
+                            id: product.id, 
+                            title: product.name, 
+                            description: product.description, 
+                            image: product.image,
                         }}
                     />
                 ))
