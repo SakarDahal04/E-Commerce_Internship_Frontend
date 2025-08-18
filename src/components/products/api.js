@@ -1,80 +1,30 @@
-export async function authTokens() {
-    const res = await fetch("http://localhost:8000/api/login/", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "username": "admin",
-            "password": "admin"
-        })
-    })
-    const data = await res.json()
+import { createAxiosInstance } from "../../services/axiosConfig"
+import AuthContext from "../../context/AuthContext"
+import { useContext } from "react"
 
-    if (!res.ok) {
-        throw new Error("we can't fetch products")
-    }
-    else {
-        return data
-    }
+export function useApi() {
+  const { authTokens, setAuthTokens, setUser } = useContext(AuthContext)
+  return createAxiosInstance(authTokens, setAuthTokens, setUser)
 }
 
-export async function fetchProduct(id, filters = {}, search) {
-    let params = new URLSearchParams();
-    const authToken = await authTokens()
-
-
-    if (id) {
-        let query = id + "/"
-        const res = await fetch(`http://localhost:8000/api/product/products/${query}`, {
-            headers: {
-                Authorization: `Bearer ${authToken.access}`
-            }
-        });
-        const data = await res.json()
-
-
-        if (!res.ok) {
-            throw new Error("we can't fetch products")
-        }
-        else {
-            return data
-        }
+export async function fetchProduct(api, id, filters = {}, search) {
+  let params = new URLSearchParams()
+  if (filters) {
+    for (const [key, value] of Object.entries(filters)) {
+      params.append(key, value)
     }
-
-    if (filters) {
-        for (const [key, value] of Object.entries(filters)) {
-            params.append(key, value);
-        }
-    }
-    if (search) {
-        params.append("search", search)
-    }
-
-    let query = ""
-    if (params.toString()) {
-        query = `?${params.toString()}`
-    }
-
-    console.log("QUERY MA K XA ", query)
-
-    const res = await fetch(`http://localhost:8000/api/product/products/${query}`, {
-        headers: {
-            Authorization: `Bearer ${authToken.access}`
-        }
-    });
-    // const res = await fetch(`http://localhost:8000/api/product/products/${query}`)
-    const data = await res.json()
-
-
-    if (!res.ok) {
-        throw new Error("we can't fetch products")
-    }
-    else {
-        return data.results
-    }
+  }
+  if (search) {
+    params.append("search", search)
+  }
+  let query = params.toString() ? `?${params.toString()}` : ""
+  if (id) {
+    const res = await api.get(`/product/products/${id}/`)
+    return res.data
+  }
+  const res = await api.get(`/product/products/${query}`)
+  return res.data.results
 }
-
 
 export async function fetchCategory() {
     const res = await fetch("http://localhost:8000/products/api/categories")
