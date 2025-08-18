@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
+import { useApi } from "./api";
 import { useParams } from "react-router-dom";
 import { fetchProduct } from "./api";
 import Cards from "../common/Cards";
 import Table from "../common/Table";
 
 function ProductDetail() {
+    const api = useApi()
     const [product, setproduct] = useState({});
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const { id } = useParams()
     console.log("ID yo ho", id)
 
-    useEffect(() => { loadproduct(id) }, [])
+    useEffect(() => { if(id) loadproduct(id) }, [id])
 
     async function loadproduct(id) {
         try {
             setLoading(true);
             // const filters = { category: "1" }
-            const data = await fetchProduct(id)
+            const data = await fetchProduct(api,id)
             console.log(data)
             setproduct(data)
         }
@@ -36,8 +38,9 @@ function ProductDetail() {
     }
     const mytable = {
         heading: product.name,
-        list: product 
+        list: product
     }
+    console.log(mytable)
 
     return (
         <>

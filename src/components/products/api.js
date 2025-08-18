@@ -19,6 +19,7 @@ export async function fetchProduct(api, id, filters = {}, search) {
   }
   let query = params.toString() ? `?${params.toString()}` : ""
   if (id) {
+    console.log("YETA XUUU ID TIRA")
     const res = await api.get(`api/product/products/${id}/`)
     return res.data
   }

@@ -42,12 +42,7 @@ function ProductCard() {
     if (error) {
         return <p>some errors man: {error}</p>
     }
-    let products_purified = []
-    for (let i in products) {
-        if (products[i] != null) {
-            products_purified.push([i, products[i]])
-        }
-    }
+    
     function handleSearchClient() {
         const q = searchTerm.trim().toLowerCase();
         if (!q) {
@@ -72,7 +67,7 @@ function ProductCard() {
         <>
             <Search search={mySearch} />
 
-            {filteredProducts.length === 0 ? (
+            {filteredProducts.length == 0 ? (
                 <p>No products match your search.</p>
             ) : (
                 filteredProducts.map((product) => (
