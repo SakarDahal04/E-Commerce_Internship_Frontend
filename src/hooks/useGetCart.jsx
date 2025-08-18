@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext } from 'react'
 import { createAxiosInstance } from '../services/axiosConfig'
 import AuthContext from '../context/AuthContext'

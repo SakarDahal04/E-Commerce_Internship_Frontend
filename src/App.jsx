@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Product from './components/products/ProductList.jsx'
+// import Product from './components/products/ProductList.jsx'
 
-import { Route } from 'react-router-dom'
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 
 import RootLayout from './Layout/RootLayout'
 import { AuthContextProvider } from './context/AuthContext'
@@ -15,8 +15,6 @@ import OrderLayout from './Layout/OrderLayout'
 
 
 import Cart from './components/Cart/Cart'
-// import CartItem from './components/CartItem/CartItem'
-// import { fetchCartLoader, fetchOrderLoader } from './utils/loaders'
 import Login from './pages/Login'
 import { Outlet } from 'react-router-dom'
 import Register from './pages/Register'
@@ -25,6 +23,8 @@ import UserOrders from "./components/UserOrders";
 import OrderItems from "./components/OrderItems";
 import ProductCard from './components/products/ProductCard'
 import ProductDetail from './components/products/ProductDetail'
+
+import Product from './components/Product/Product'
 
 
 function AuthWrapper() {
@@ -49,11 +49,9 @@ function App() {
               <CartLayout />
             </PrivateRoute>
           }>
-            <Route index element={<Cart />} loader={fetchCartLoader} />
+            <Route index element={<Cart />}/>
             {/* <Route path=':id' element={<CartItem />} /> */}
           </Route>
-            <Route path='products' element={<ProductCard />} />
-            <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
@@ -63,7 +61,7 @@ function App() {
             <Route path="/order-items/:orderId" element={<OrderItems />} />
           </Route>
 
-          <Route path='products' element={<ProductCard />} />
+          <Route path='products' element={<Product />} />
           <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>

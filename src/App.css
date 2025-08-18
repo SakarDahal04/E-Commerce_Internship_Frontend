@@ -9,25 +9,3 @@ html, body {
   flex-direction: column;
   min-height: 100vh; /* make the container at least fill the screen */
 }
-
-.main-content {
-  flex: 1; 
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
-}
-/* 
-table, td, th {
-  border: 1px solid;
-  text-align: center;
-}
-table{
-  width: fit-content; 
-  border-color: white;
-  border-radius: 10px;
-  background-color: blueviolet;
-  border-collapse: collapse;
-
-} */
