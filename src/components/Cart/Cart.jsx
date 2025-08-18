@@ -1,18 +1,31 @@
-import { useLoaderData } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import AuthContext from "../../context/AuthContext"
 import { createAxiosInstance } from './../../services/axiosConfig'
 
 import "./Cart.css"
 import CartItem from "../CartItem/CartItem"
+import useGetCart from "../../hooks/useGetCart"
 
 const Cart = () => {
-  const loadedCartItems = useLoaderData()
-  const [cartItems, setCartItems] = useState(loadedCartItems)
+  const [cartItems, setCartItems] = useState([])
 
-  const { authTokens, setAuthTokens, setUser } = useContext(AuthContext)
-  const api = createAxiosInstance(authTokens, setAuthTokens, setUser)
+  const getCartList = useGetCart()
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const data = await getCartList()
+        setOrders(data.results)
+
+        console.log("Obtained Cart: ", data.results)
+      } catch (err) {
+        console.log("Failed to fetch the cart: ", err.message)
+      }
+    }
+
+    fetchCart()
+  }, [])
 
   const removeItem = (id) => {
     setCartItems(prev => prev.filter(item => item.id !== id));

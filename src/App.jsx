@@ -8,9 +8,12 @@ import Home from './pages/Home'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
 import CartLayout from './Layout/CartLayout'
+import OrderLayout from './Layout/OrderLayout'
+
+
 import Cart from './components/Cart/Cart'
 // import CartItem from './components/CartItem/CartItem'
-import { fetchCartLoader, fetchOrderLoader } from './utils/loaders'
+// import { fetchCartLoader, fetchOrderLoader } from './utils/loaders'
 import Login from './pages/Login'
 import { Outlet } from 'react-router-dom'
 import Register from './pages/Register'
@@ -38,22 +41,19 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
 
-          <Route path='cart' element={
-            <PrivateRoute>
-              <CartLayout />
-            </PrivateRoute>
-          }>
-            <Route index element={<Cart />} loader={fetchCartLoader} />
-            {/* <Route path=':id' element={<CartItem />} /> */}
-          </Route>
-            <Route path='products' element={<ProductCard />} />
-            <Route path='products/:id' element={<ProductDetail />} />
-
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
 
-          <Route path="orders" element={<UserOrders />} loader={fetchOrderLoader} />
-        <Route path="/order-items/:orderId" element={<OrderItems />} />
+          <Route path='/' element={<PrivateRoute> <OrderLayout /> </PrivateRoute>}>
+            <Route path="orders" element={<UserOrders />} />
+            <Route path="/order-items/:orderId" element={<OrderItems />} />
+          </Route>
+
+          <Route path='cart' element={ <PrivateRoute> <CartLayout /> </PrivateRoute>}>
+            <Route index element={<Cart />} />
+            {/* <Route path=':id' element={<CartItem />} /> */}
+          </Route>
+
 
           <Route path="*" element={<NotFound />} />
         </Route>
