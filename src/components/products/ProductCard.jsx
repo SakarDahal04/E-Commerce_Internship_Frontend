@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import { fetchProduct } from "./api";
+import { useApi } from "./api";
 import Cards from "../common/Cards";
-import { Link } from "react-router-dom";
+import Search from "../common/Search";
 
 function ProductCard() {
+    const api = useApi()
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [searchTerm, setSearchTerm] = useState("");
+
 
     useEffect(() => { loadProducts() }, [])
 
@@ -14,9 +20,12 @@ function ProductCard() {
         try {
             setLoading(true);
             // const filters = { category: "1" }
-            const data = await fetchProduct()
-            console.log(data)
+            const data = await fetchProduct(api)
+            const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
+
             setProducts(data)
+            setProducts(arr);
+            setFilteredProducts(arr);
         }
         catch (err) {
             console.error("Error fetching products:", err);
@@ -39,13 +48,43 @@ function ProductCard() {
             products_purified.push([i, products[i]])
         }
     }
+    function handleSearchClient() {
+        const q = searchTerm.trim().toLowerCase();
+        if (!q) {
+            setFilteredProducts(products);
+            return;
+        }
+        const filtered = products.filter(p => {
+            if (!p) return false;
+            return String(p.name || "").toLowerCase().includes(q)
+        });
+        setFilteredProducts(filtered);
+    }
+    const mySearch = {
+        searchPlaceholder: "Search Product",
+        onChange: setSearchTerm ,
+        onSearch:  handleSearchClient 
+
+        // searchFunction: 
+    }
     console.log("YETA XU CARDS MA")
     return (
         <>
-            {products_purified.map((product) => <Cards key={product[1].id} card={{ id: product[1].id, title: product[1].name, description: product[1].description }} />)}
+            <Search search={mySearch} />
+
+            {filteredProducts.length === 0 ? (
+                <p>No products match your search.</p>
+            ) : (
+                filteredProducts.map((product) => (
+                    <Cards
+                        key={product.id}
+                        card={{
+                            id: product.id, title: product.name, description: product.description, image: product.image,
+                        }}
+                    />
+                ))
+            )}
         </>
-    )
-
+    );
 }
-
 export default ProductCard
