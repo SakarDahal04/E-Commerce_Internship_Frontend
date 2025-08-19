@@ -221,7 +221,7 @@ body {
 
 .order-total {
   display: inline-block;
-  background: rgba(175, 181, 253, 0.378); 
+  background: rgba(248, 249, 255, 0.378); 
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   padding: 8px 16px;
