@@ -5,16 +5,12 @@ import { SiContributorcovenant } from "react-icons/si";
 
 function Table({ table }) {
 
-    // let heading_list = []
-    // for (const [key, value] of Object.entries(table.list)) {
-    //     heading_list.push(key);
-    // }
     let body_list = []
-    for (let[key, value]  of Object.entries(table.list)) {
-        if(isDictionary(value)){
+    for (let [key, value] of Object.entries(table.list)) {
+        if (isDictionary(value)) {
             value = value.name
         }
-        if(value==null || key == 'id' || key == 'created_at' || key == 'updated_at'){
+        if (value == null || key == 'id' || key == 'created_at' || key == 'updated_at') {
             continue;
         }
         body_list.push([key, value])
@@ -24,12 +20,18 @@ function Table({ table }) {
         <div>
             <h1>{table.heading}</h1>
 
-                <table>
-                    {body_list.map((eachRow)=> <tr key={eachRow[0]}> 
+            <table>
+                <thead>
+                    <td><b>Attributes</b></td>
+                    <td><b>Values</b></td>
+                </thead>
+                <tbody>
+                    {body_list.map((eachRow) => <tr key={eachRow[0]}>
                         <td>{eachRow[0]}</td>
                         <td>{eachRow[1]}</td>
-                         </tr>)}
-                </table>
+                    </tr>)}
+                </tbody>
+            </table>
         </div>
     )
 

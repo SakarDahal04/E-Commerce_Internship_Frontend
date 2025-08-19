@@ -16,7 +16,7 @@ function ProductCard() {
 
 
     useEffect(() => { loadProducts() }, [])
-    useEffect(() => { loadTagsAndCategories()}, [])
+    useEffect(() => { loadTagsAndCategories() }, [])
 
     async function loadProducts() {
         try {
@@ -43,15 +43,14 @@ function ProductCard() {
     if (error) {
         return <p>some errors man: {error}</p>
     }
-    async function loadTagsAndCategories(){
-        try{
+    async function loadTagsAndCategories() {
+        try {
             const data = await fetchCategory(api)
             const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
-            console.log("AAYO HAI TA", arr)
             setCategories(arr);
 
         }
-        catch(err){
+        catch (err) {
             setError("can't fetch any categories")
         }
     }
@@ -70,45 +69,46 @@ function ProductCard() {
     }
     const mySearch = {
         searchPlaceholder: "Search Product",
-        onChange: setSearchTerm ,
-        onSearch:  handleSearchClient 
+        onChange: setSearchTerm,
+        onSearch: handleSearchClient
 
         // searchFunction: 
     }
-    function filterProduct(){
-        setFilteredProducts()
+    //     function filterProduct(){
+    //         setFilteredProducts()
+    //     }
+
+    const filterProducts = (e) => {
+        const updatedCategories = categories.map(cat =>
+            cat.id === parseInt(e.target.id)
+                ? { ...cat, isChecked: e.target.checked }
+                : cat
+        );
+        setCategories(updatedCategories);
+        console.log("UPDATE VAXA KI NAI", updatedCategories)
+
+        const tempProduct = [];
+        for (let c of updatedCategories) {
+            if (c.isChecked) {
+                tempProduct.push(...products.filter(p => p.category.id === c.id));
+            }
+        }
+        setFilteredProducts(tempProduct.length > 0 ? tempProduct : products);
     }
 
-  const filterProducts = (e) => {
-const categories = [...categories];
-    const cat = categories.filter((cat)=>cat.value ===  e.target.value);
-    cat[0].isChecked = e.target.checked;
-    setCategories([...categories]);
-
-    const tempProduct = [];
-    for(let c of categories){
-      if(c.isChecked){
-        tempProduct.push(...products.filter((a) => a.category === c.value));
-      }
-    }
-
-    setFilteredProducts([...tempProduct]);
-  }
-
-    console.log("YETA XU CARDS MA")
     return (
         <>
-        <div className="category-tags-side-panel">
-        <h1> Categories</h1> 
-        {categories.map((category)=> (
-            <div key={`${category.name}-${category.id}`}>
-            <input type="checkbox" id={category.id} name={category.id} onChange={filterProduct}/> 
-            <label htmlFor= {category.id}>{category.name}</label>
-            </div>
-            ))}
-        <h1> tags</h1> 
+            <div className="category-tags-side-panel">
+                <h1> Categories</h1>
+                {categories.map((category) => (
+                    <div key={`${category.name}-${category.id}`}>
+                        <input type="checkbox" id={category.id} name={category.id} onChange={filterProducts} />
+                        <label htmlFor={category.id}>{category.name}</label>
+                    </div>
+                ))}
+                <h1> tags</h1>
 
-        </div>
+            </div>
             <Search search={mySearch} />
 
             {filteredProducts.length == 0 ? (

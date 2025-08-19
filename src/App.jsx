@@ -21,11 +21,9 @@ import Register from './pages/Register'
 import PrivateRoute from './context/PrivateRoute'
 import UserOrders from "./components/UserOrders";
 import OrderItems from "./components/OrderItems";
-import ProductCard from './components/products/ProductCard'
 import ProductDetail from './components/products/ProductDetail'
 
 import ProductCard from './components/products/ProductCard'
-import ProductDetail from './components/products/ProductDetail'
 
 import Product from './components/Product/Product'
 
@@ -64,7 +62,7 @@ function App() {
             <Route path="/order-items/:orderId" element={<OrderItems />} />
           </Route>
 
-          <Route path='products' element={<Product />} />
+          <Route path='products' element={<ProductCard />} />
           <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>

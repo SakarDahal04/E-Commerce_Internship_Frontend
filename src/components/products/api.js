@@ -9,6 +9,10 @@ export function useApi() {
 
 export async function fetchProduct(api, id, filters = {}, search) {
     let params = new URLSearchParams()
+    if (id) {
+        const res = await api.get(`api/product/products/${id}/`)
+        return res.data
+    }
     if (filters) {
         for (const [key, value] of Object.entries(filters)) {
             params.append(key, value)
@@ -18,11 +22,6 @@ export async function fetchProduct(api, id, filters = {}, search) {
         params.append("search", search)
     }
     let query = params.toString() ? `?${params.toString()}` : ""
-    if (id) {
-        console.log("YETA XUUU ID TIRA")
-        const res = await api.get(`api/product/products/${id}/`)
-        return res.data
-    }
     const res = await api.get(`api/product/products/${query}`)
     return res.data.results
 }

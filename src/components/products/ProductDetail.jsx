@@ -10,8 +10,9 @@ function ProductDetail() {
     const [product, setproduct] = useState({});
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    useEffect(()=>{}, [])
     const { id } = useParams()
-    console.log("ID yo ho", id)
+    //allows access to dynamic URL parameters ,, in this case: id
 
     useEffect(() => { if(id) loadproduct(id) }, [id])
 
