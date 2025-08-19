@@ -14,7 +14,7 @@ function Table({ table }) {
         if(isDictionary(value)){
             value = value.name
         }
-        if(value==null){
+        if(value==null || key == 'id' || key == 'created_at' || key == 'updated_at'){
             continue;
         }
         body_list.push([key, value])

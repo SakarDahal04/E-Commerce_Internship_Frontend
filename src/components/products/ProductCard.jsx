@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProduct } from "./api";
+import { fetchProduct, fetchCategory } from "./api";
 import { useApi } from "./api";
 import Cards from "../common/Cards";
 import Search from "../common/Search";
@@ -8,6 +8,7 @@ function ProductCard() {
     const api = useApi()
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [categories, setCategories] = useState([])
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -15,6 +16,7 @@ function ProductCard() {
 
 
     useEffect(() => { loadProducts() }, [])
+    useEffect(() => { loadTagsAndCategories()}, [])
 
     async function loadProducts() {
         try {
@@ -23,7 +25,6 @@ function ProductCard() {
             const data = await fetchProduct(api)
             const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
 
-            setProducts(data)
             setProducts(arr);
             setFilteredProducts(arr);
         }
@@ -42,7 +43,19 @@ function ProductCard() {
     if (error) {
         return <p>some errors man: {error}</p>
     }
-    
+    async function loadTagsAndCategories(){
+        try{
+            const data = await fetchCategory(api)
+            const arr = Array.isArray(data) ? data : Object.values(data).filter(Boolean);
+            console.log("AAYO HAI TA", arr)
+            setCategories(arr);
+
+        }
+        catch(err){
+            setError("can't fetch any categories")
+        }
+    }
+
     function handleSearchClient() {
         const q = searchTerm.trim().toLowerCase();
         if (!q) {
@@ -62,9 +75,40 @@ function ProductCard() {
 
         // searchFunction: 
     }
+    function filterProduct(){
+        setFilteredProducts()
+    }
+
+  const filterProducts = (e) => {
+const categories = [...categories];
+    const cat = categories.filter((cat)=>cat.value ===  e.target.value);
+    cat[0].isChecked = e.target.checked;
+    setCategories([...categories]);
+
+    const tempProduct = [];
+    for(let c of categories){
+      if(c.isChecked){
+        tempProduct.push(...products.filter((a) => a.category === c.value));
+      }
+    }
+
+    setFilteredProducts([...tempProduct]);
+  }
+
     console.log("YETA XU CARDS MA")
     return (
         <>
+        <div className="category-tags-side-panel">
+        <h1> Categories</h1> 
+        {categories.map((category)=> (
+            <div key={`${category.name}-${category.id}`}>
+            <input type="checkbox" id={category.id} name={category.id} onChange={filterProduct}/> 
+            <label htmlFor= {category.id}>{category.name}</label>
+            </div>
+            ))}
+        <h1> tags</h1> 
+
+        </div>
             <Search search={mySearch} />
 
             {filteredProducts.length == 0 ? (
