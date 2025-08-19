@@ -2,18 +2,19 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #d7cdfe;
-  border: 1px solid #000000;
-  border-radius: 14px;
-  padding: 14px 16px;
-  flex: 1 1 200px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, #f0ebff, #d6c9fe); 
+  border: 1px solid rgba(0, 0, 0, 0.08); 
+  border-radius: 16px; 
+  padding: 16px 20px;
+  flex: 1 1 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), 
+              inset 0 2px 5px rgba(255, 255, 255, 0.3); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  
 }
+
 
 .product-card::before {
   content: '';
