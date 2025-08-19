@@ -11,5 +11,23 @@ html, body {
 }
 
 .main-content {
-  flex: 1; /* pushes footer to the bottom when content is short */
+  flex: 1; 
+  max-width: 1280px;
+  /* margin: 0 auto; */
+  padding: 2rem;
+  text-align: center;
+
 }
+/* 
+table, td, th {
+  border: 1px solid;
+  text-align: center;
+}
+table{
+  width: fit-content; 
+  border-color: white;
+  border-radius: 10px;
+  background-color: blueviolet;
+  border-collapse: collapse;
+
+} */

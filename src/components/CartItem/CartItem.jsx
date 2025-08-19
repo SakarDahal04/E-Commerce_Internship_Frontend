@@ -18,7 +18,6 @@ const CartItem = ({ index, item, updateQuantity, toggleSelect, removeItem }) => 
           data: [{ id: item.id }]
         }
       )
-
       console.log('Deleted Items', res.data)
       removeItem(item.id); 
     } catch (error) {

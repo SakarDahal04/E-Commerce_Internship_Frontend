@@ -1,4 +1,4 @@
-import { FaHome, FaChevronDown, FaInfoCircle, FaFolderOpen, FaClipboardList, FaShoppingBag, FaChevronRight, FaGoogle, FaTwitter, FaLinkedin, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { FaHome, FaChevronDown, FaInfoCircle, FaFolderOpen, FaClipboardList, FaShoppingBag, FaChevronRight, FaGoogle, FaTwitter, FaLinkedin, FaShoppingCart, FaTrash, FaRegHeart } from "react-icons/fa";
 
 const IconMap = {
   FaHome,
@@ -13,6 +13,7 @@ const IconMap = {
   FaLinkedin,
   FaShoppingCart,
   FaTrash,
+  FaRegHeart
 }
 
 export const DynamicIcon = ({ iconName, fallback = null, ...props }) => {

@@ -1,0 +1,11 @@
+.common-button {
+    background-color: var(--background-color, black );
+    color: var(--text-color, white);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+    /* border-radius: ; */
+
+}

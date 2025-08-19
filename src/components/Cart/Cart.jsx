@@ -8,6 +8,9 @@ import CartItem from "../CartItem/CartItem"
 import useGetCart from "../../hooks/useGetCart"
 
 const Cart = () => {
+  const { authTokens, setAuthTokens, setUser, logoutUser } = useContext(AuthContext)
+  const api = createAxiosInstance(authTokens, setAuthTokens, setUser, logoutUser)
+
   const [cartItems, setCartItems] = useState([])
 
   const getCartList = useGetCart()
@@ -16,7 +19,7 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         const data = await getCartList()
-        setOrders(data.results)
+        setCartItems(data.results)
 
         console.log("Obtained Cart: ", data.results)
       } catch (err) {
@@ -122,6 +125,7 @@ const Cart = () => {
     if (!checkForCartItem()) return
     console.log("hello")
     await updateSelectedItems()
+    console.log("alreaady updated")
     await createOrder()
   }
 
