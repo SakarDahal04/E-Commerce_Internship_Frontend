@@ -27,7 +27,11 @@ const Register = () => {
     const handleRegisterForm = (e) => {
         e.preventDefault();
         console.log('obatained value\n')
-        console.log(formValues['username'], formValues['password'], formValues['email'], formValues['confirm_password'] )
+        console.log(
+            "\nusername", formValues['username'],
+            "\npassword",  formValues['password'],
+            "\nemail",  formValues['email'], 
+            "\nConfirm", formValues['confirm_password'] )
         registerUser( 
             formValues['username'], 
             formValues['password'], 

@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./UserOrders.css";
 
-import { useLoaderData } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import useGetOrders from "../hooks/useGetOrders";
 
@@ -31,7 +30,7 @@ export default function UserOrders() {
 
   return (
     <div className="orders-grid">
-      {orders.map((order) => (
+      {orders.length > 0 ? orders.map((order) => (
         <div className="order-card" key={order.id}>
           <h3>Order #{order.id}</h3>
 
@@ -57,7 +56,7 @@ export default function UserOrders() {
           </Link>
         </div>
       )
-    )}
+    ) : <p>There are no orders placed till now.</p>}
     </div>
   )
 }
