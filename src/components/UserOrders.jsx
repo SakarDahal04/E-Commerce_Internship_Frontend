@@ -34,7 +34,7 @@ export default function UserOrders() {
     orders.map((order) => (
       <div className="order-card" key={order.id}>
         {/* Order Title */}
-        <h3 className="order-title">Order #{order.id}</h3>
+        <h3 className="order-title">Order - {order.id}</h3>
         <p className="order-date">
           Placed on {new Date(order.created_at).toLocaleDateString()}
         </p>
