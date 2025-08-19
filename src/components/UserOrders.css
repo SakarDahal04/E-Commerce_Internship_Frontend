@@ -14,11 +14,9 @@ body {
 
 .products-grid {
   display: flex;
-  flex-wrap: wrap; /* allow items to go to next row */
+  flex-wrap: wrap; 
   gap: 16px;
-  justify-content: flex-start; /* instead of center if you want multiple rows */
-  /* max-height: 400px; /* optional: limit height */
-  /* scroll if too many items */
+  justify-content: flex-start; 
 }
 
 
@@ -34,6 +32,7 @@ body {
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  flex-shrink: 0; 
 }
 
 .product-details {
@@ -67,7 +66,7 @@ body {
 
 .view-link {
   align-self: flex-start;
-  padding: 12px 18px;
+  padding: 12px 24px;
   background: linear-gradient(135deg, #7f5af0, #6246ea);
   color: white;
   font-size: 0.95rem;
@@ -75,12 +74,23 @@ body {
   letter-spacing: 0.3px;
   text-decoration: none;
   border-radius: 8px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .view-link:hover {
   background: linear-gradient(135deg, #6a4ae0, #523ed0);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.view-link:active {
+  background: linear-gradient(135deg, #523ed0, #6a4ae0);
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -115,10 +125,53 @@ body {
 .cancelled { background-color: #ef4444; }
 
 .order-card {
-  background: #fff;
+  background: rgba(163, 183, 202, 0.7);
   padding: 24px;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+              inset 0 2px 5px rgba(255, 255, 255, 0.2);
   margin-bottom: 30px;
-  overflow: visible; /* important to allow inner scroll */
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.order-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 250%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: skewX(-25deg);
+  filter: blur(8px);
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-25deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-25deg);
+  }
+}
+
+.order-card:hover::after {
+  animation-play-state: running; 
+}
+
+.order-card h3 {
+  position: relative;
+  z-index: 2;
+  color: #222;
 }
