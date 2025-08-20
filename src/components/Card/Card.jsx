@@ -10,7 +10,6 @@ const Card = ({ cardDetails }) => {
     const handleAddToCart = async () => {
         try {
             const data = await addItemToCart()
-            console.log(data)
         } catch (error) {
             console.log("Error in saving the items to the cart: ", error)
         }
@@ -21,7 +20,7 @@ const Card = ({ cardDetails }) => {
             <img src={cardDetails.image} alt="product-image" />
 
             <div className="cardDescription">
-                <div className='productCategory'>{cardDetails.category || "No Category"}</div>
+                <div className='productCategory'>{cardDetails.category?.name || "No Category"}</div>
                 <div className='productName'>{cardDetails.name}</div>
                 <div className='productPrice'>$ {cardDetails.price}</div>
             </div>

@@ -2,11 +2,18 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 2rem;
-    padding: 2rem 8rem;
+    padding: 2rem 3rem;
 }
 
 .shopProductContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); */
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 1rem;
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }

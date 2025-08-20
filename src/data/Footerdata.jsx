@@ -4,19 +4,19 @@ export const FooterData = [
         "items": [
             {
                 "title": "What We Do",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "Available Services",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "Latest Posts",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "FAQs",
-                "link": "/home",
+                "link": "/",
             },
         ]
     },
@@ -33,11 +33,11 @@ export const FooterData = [
             },
             {
                 "title": "Order Tracking",
-                "link": "/home",
+                "link": "/orders",
             },
             {
                 "title": "Help and Support",
-                "link": "/home",
+                "link": "/",
             },
         ]
     },
@@ -46,19 +46,19 @@ export const FooterData = [
         "items": [
             {
                 "title": "Help and Contact Us",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "Returns and Refunds",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "Online Stores",
-                "link": "/home",
+                "link": "/",
             },
             {
                 "title": "Terms and Conditions",
-                "link": "/home",
+                "link": "/",
             },
         ]
     },
