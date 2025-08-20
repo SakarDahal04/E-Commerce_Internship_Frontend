@@ -72,7 +72,7 @@ const Cart = () => {
       .reduce((sum, item) => sum + item.quantity * item.product.price, 0)
   }
 
-  const updateSelectedItems = async () => {
+  const getSelectedItems = () => {
     const selectedItems = cartItems
       // .filter(item => item.selected_for_checkout) // or all items if you allow quantity changes for unselected
       .map(item => ({
@@ -80,6 +80,20 @@ const Cart = () => {
         quantity: item.quantity,
         selected_for_checkout: item.selected_for_checkout
       }))
+
+    return selectedItems
+  }
+
+  const updateSelectedItems = async () => {
+    // const selectedItems = cartItems
+    //   // .filter(item => item.selected_for_checkout) // or all items if you allow quantity changes for unselected
+    //   .map(item => ({
+    //     id: item.id,
+    //     quantity: item.quantity,
+    //     selected_for_checkout: item.selected_for_checkout
+    //   }))
+
+    const selectedItems = getSelectedItems()
 
     if (!selectedItems.length) return
 
@@ -100,17 +114,26 @@ const Cart = () => {
   }
 
   const createOrder = async () => {
+    const items = getSelectedItems()
+
+    const selectedItems = items.filter(item => item.selected_for_checkout)
+    console.log("Selected items", selectedItems)
+
+    if (!selectedItems.length) return
+
     try {
       const res = await api.post(
         `/cart/checkout-request/`,
-        "",
+        JSON.stringify(selectedItems),
         {
           headers: { "Content-Type": "application/json" }
         }
       )
 
-      // const data = await res.json()
-      console.log("Order created:", res.data)
+      console.log("Checkout session created:", res.data)
+
+      // Redirect user to Stripe checkout
+      window.location.href = res.data.checkout_url
 
       // Remove purchased items from local state
       setCartItems(prev => prev.filter(item => !item.selected_for_checkout))
@@ -124,7 +147,7 @@ const Cart = () => {
     e.preventDefault()
     if (!checkForCartItem()) return
     console.log("hello")
-    await updateSelectedItems()
+    // await updateSelectedItems()
     await createOrder()
   }
 

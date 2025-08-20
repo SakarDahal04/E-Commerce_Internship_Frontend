@@ -59,7 +59,7 @@ export default function OrderItems() {
             <span
               className={`status-badge ${item.status?.toLowerCase() || "pending"}`}
             >
-              {item.status || "Pending"}
+              {item.order?.status || "Pending"}
             </span>
           </div>
 
