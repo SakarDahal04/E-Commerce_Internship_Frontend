@@ -34,9 +34,10 @@ const Home = () => {
         </p>
       </div>
       <div className="productGridContainer">
-        {productList.map((product) => (
+        {productList ? 
+          productList.map((product) => (
           <Card key={product.id} cardDetails={product} />
-        ))}
+        )) : <h2>There is not products to show</h2> }
       </div>
     </div>
   )
