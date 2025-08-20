@@ -17,7 +17,7 @@ import Product from './components/products/ProductList.jsx'
 
 import RootLayout from './Layout/RootLayout'
 import { AuthContextProvider } from './context/AuthContext'
-import {FilterContextProvider} from './context/FilterContext'
+import { FilterContextProvider } from './context/FilterContext'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -43,7 +43,7 @@ function AuthWrapper() {
   return (
     <AuthContextProvider>
       {/* <FilterContextProvider> */}
-        <Outlet />
+      <Outlet />
       {/* </FilterContextProvider> */}
     </AuthContextProvider>
   )
@@ -77,7 +77,11 @@ function App() {
 
           {/* <Route path='products' element={<ProductCard />} /> */}
 
-          <Route path='products' element={<Product />} />
+          <Route path='products' element={
+            <FilterContextProvider>
+              <Product />
+            </FilterContextProvider>
+          } />
           <Route path='products/:id' element={<ProductDetail />} />
 
           <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>
