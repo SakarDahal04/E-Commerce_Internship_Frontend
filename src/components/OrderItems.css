@@ -1,6 +1,5 @@
 .product-card {
   display: flex;
-<<<<<<< HEAD
   justify-content: space-between; 
   align-items: center;
   gap: 16px;
@@ -12,17 +11,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
               inset 0 2px 5px rgba(255, 255, 255, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-=======
-  align-items: flex-start;
-  gap: 20px;
-  background: linear-gradient(145deg, #fff2f0, #ffe4f1);
-  border: 1px solid #e0a4c0;
-  border-radius: 14px;
-  padding: 20px;
-  flex: 1 1 400px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
->>>>>>> 2312fc3 (changed styles and fixed bugs)
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -32,7 +20,6 @@
   content: '';
   position: absolute;
   top: 0;
-<<<<<<< HEAD
   left: -150%;
   width: 200%;
   height: 100%;
@@ -113,66 +100,6 @@
 .product-meta .value {
   font-weight: 600;
   color: #222;
-=======
-  left: 0;
-  height: 5px;
-  width: 100%;
-  background: linear-gradient(90deg, #ff4d88, #ff80aa);
-}
-
-.product-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
-}
-
-.product-image {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  flex-shrink: 0;
-}
-
-.product-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-}
-
-.product-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 8px;
-}
-
-.product-description {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.product-price {
-  font-weight: bold;
-  font-size: 16px;
-  color: #e63972;
-}
-
-@media (max-width: 600px) {
-  .product-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .product-image {
-    width: 100%;
-    height: auto;
-    max-width: 300px;
-  }
->>>>>>> 2312fc3 (changed styles and fixed bugs)
 }
 
 

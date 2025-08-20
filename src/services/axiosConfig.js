@@ -2,11 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
 
-<<<<<<< HEAD
 export const createAxiosInstance = (authTokens, setAuthTokens, setUser, logoutUser) => {
-=======
-export const createAxiosInstance = (authTokens, setAuthTokens, setUser) => {
->>>>>>> 6b68a90 (Features of cart, authentication login and registration completed with interceptors for auth tokens)
     const axiosInstance = axios.create({
         baseURL: import.meta.env.VITE_API_URL,
     })
@@ -47,10 +43,7 @@ export const createAxiosInstance = (authTokens, setAuthTokens, setUser) => {
                 return req
             } catch (error) {
                 console.log("Refresh token is expired. Logging out.....")
-<<<<<<< HEAD
                 logoutUser()
-=======
->>>>>>> 6b68a90 (Features of cart, authentication login and registration completed with interceptors for auth tokens)
 
                 return Promise.reject(error)
             }

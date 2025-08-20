@@ -15,7 +15,7 @@ export default function OrderItems() {
 
   useEffect(() => {
     const fetchOrderItemDetail = async () => {
-      const data = await api.get(`api/user_ordersorder-items/`)
+      const data = await api.get(`api/user_ordersorder-items?order_id=${orderId}`)
 
       console.log("Order items", data)
 
