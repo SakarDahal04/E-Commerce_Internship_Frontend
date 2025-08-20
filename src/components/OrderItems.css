@@ -1,14 +1,16 @@
 .product-card {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  background: linear-gradient(145deg, #fff2f0, #ffe4f1);
-  border: 1px solid #e0a4c0;
-  border-radius: 14px;
-  padding: 20px;
-  flex: 1 1 400px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  justify-content: space-between; 
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(145deg, #f6f5f9, #e1dbf6);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 12px 20px;
+  flex: 1 1 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
+              inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -18,62 +20,145 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  background: linear-gradient(90deg, #ff4d88, #ff80aa);
+  left: -150%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: skewX(-20deg);
+  filter: blur(8px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.product-card:hover::before {
+  animation: shine-sweep 1s forwards;
+}
+
+@keyframes shine-sweep {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
 }
 
 .product-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
 }
 
 .product-image {
-  width: 150px;
-  height: 150px;
+  width: 240px;      
+  height: 200px;     
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 12px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  margin-left: 120px; 
 }
+
 
 .product-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
+  gap: 8px; 
+  align-self: flex-start;
+  margin-top: -20px; 
 }
 
 .product-title {
-  font-size: 18px;
+  font-size: 25px; 
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #222;
+  margin-left: -160px;
+}
+
+.product-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 19px; 
+  line-height: 1.5;
+  margin-left: auto;   
+  justify-content: flex-end; 
+  text-align: right;   
+  margin-right: 100px; 
+}
+
+.product-meta .label {
+  color: #555;
+  font-weight: 500;
+  min-width: 90px; 
+}
+
+.product-meta .value {
   font-weight: 600;
   color: #222;
-  margin-bottom: 8px;
 }
 
-.product-description {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 12px;
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px; 
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
-.product-price {
-  font-weight: bold;
-  font-size: 16px;
-  color: #e63972;
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
 }
 
-@media (max-width: 600px) {
-  .product-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .product-image {
-    width: 100%;
-    height: auto;
-    max-width: 300px;
-  }
+.status-badge.completed {
+  background: #d4edda;
+  color: #155724;
 }
+
+.status-badge.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+
+.view-link {
+  align-self: flex-start; 
+  padding: 12px 24px;
+  background: rgba(127, 90, 240, 0.85); 
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+}
+
+
+.view-link:hover {
+  background: rgba(127, 90, 240, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.view-link:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+
+
