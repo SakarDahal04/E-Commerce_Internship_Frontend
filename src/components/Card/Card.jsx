@@ -21,7 +21,7 @@ const Card = ({ cardDetails }) => {
             <img src={cardDetails.image} alt="product-image" />
 
             <div className="cardDescription">
-                <div className='productCategory'>{cardDetails.category || "No Category"}</div>
+                <div className='productCategory'>{cardDetails.category.name || "No Category"}</div>
                 <div className='productName'>{cardDetails.name}</div>
                 <div className='productPrice'>$ {cardDetails.price}</div>
             </div>

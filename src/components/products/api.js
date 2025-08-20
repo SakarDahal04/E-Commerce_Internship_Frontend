@@ -7,11 +7,15 @@ export function useApi() {
     return createAxiosInstance(authTokens, setAuthTokens, setUser)
 }
 
-export async function fetchProduct(api, id, filters = {}, search) {
+export async function fetchProduct(api, page_no, id, filters = {}, search = "") {
     let params = new URLSearchParams()
+    console.log("ID ::: ", id)
     if (id) {
         const res = await api.get(`api/product/products/${id}/`)
         return res.data
+    }
+    else {
+        params.append("page", page_no)
     }
     if (filters) {
         for (const [key, value] of Object.entries(filters)) {
@@ -21,14 +25,28 @@ export async function fetchProduct(api, id, filters = {}, search) {
     if (search) {
         params.append("search", search)
     }
+
     let query = params.toString() ? `?${params.toString()}` : ""
     const res = await api.get(`api/product/products/${query}`)
-    return res.data.results
+
+    return res.data
 }
 
+export async function fetchProductWithID(api, id) {
+    if (id) {
+        const res = await api.get(`api/product/products/${id}/`)
+        return res.data
+    }
+}
 export async function fetchCategory(api) {
 
     const res = await api.get(`api/product/categories/`)
+    return res.data.results
+}
+
+export async function fetchTags(api) {
+
+    const res = await api.get(`api/product/tags/`)
     return res.data.results
 }
 
@@ -37,7 +55,7 @@ export async function createCartItem(api, { body }) {
         `/cart/add-item/`,
         "",
         {
-            body: { "product_id": body.product_id, "quantity": body.quantity}
+            body: { "product_id": body.product_id, "quantity": body.quantity }
         }
     )
 
@@ -51,22 +69,6 @@ export async function createCartItem(api, { body }) {
 
 }
 
-export async function fetchTags(search = "") {
-    let query = "http://localhost:8000/products/api/tags"
-    if (search) {
-        const search = new URLSearchParams(search).toString
-        query = query + "?" + search
-    }
-
-    const res = await fetch(query)
-    if (!res.ok) {
-        throw new Error("we can't fetch tags")
-    }
-    else {
-        return res.json()
-    }
-
-}
 
 export async function fetchProductTags() {
     const res = await fetch("http://localhost:8000/products/api/categories")

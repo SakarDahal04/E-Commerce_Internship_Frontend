@@ -63,7 +63,7 @@ function App() {
           </Route>
 
           <Route path='products' element={<ProductCard />} />
-          <Route path='products/:id' element={<ProductDetail />} />
+          <Route path='products/:id/' element={<ProductDetail />} />
 
           <Route path='cart' element={<PrivateRoute> <CartLayout /> </PrivateRoute>}>
             <Route index element={<Cart />} />

@@ -12,7 +12,7 @@ function Button({button, onClick}) {
                         button.onClickFunction(e)
                     }
                 }
-            } className="common-button" style={{ '--background-color': button.bgColor, '--text-color': button.textColor }}>{button.text}</button>
+            } value = {button.value ? button.value : "button"} className="common-button" style={{ '--background-color': button.bgColor, '--text-color': button.textColor }}>{button.text}</button>
     )
 }
 
