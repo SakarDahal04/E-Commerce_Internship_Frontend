@@ -80,7 +80,7 @@ Frontend will run at: [http://localhost:5173](http://localhost:5173)
 Ensure the Django backend is running at the URL specified in `.env`.
 For backend setup, refer to the backend repository:
 
-* **Backend Repo:** [Django E-Commerce Backend](https://github.com/SakarDahal04/E-Commerce_Internship)
+* **Backend Repo:** [Django E-Commerce Backend](https://github.com/SakarDahal04/E-Commerce_Internship/tree/develop)
 
 ---
 
